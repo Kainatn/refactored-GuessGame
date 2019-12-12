@@ -57,7 +57,7 @@ export class Game extends Component {
             const { guessedNo, random } = this.state;
             if (guessedNo === random) {
                 alert('Congratulation You guessed the number in ' + this.state.count + ' tries');
-                // window.location.reload();
+             this.getRandomNumber(100);
             } else if (guessedNo < random) {
                 alert("You guessed Small Number")
             }
