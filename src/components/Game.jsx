@@ -13,7 +13,7 @@ export class Game extends Component {
         this.ref = React.createRef();
         this.state = {
             guessedNo: null,
-            count: 1,
+            count: 0,
             easyMax: 0,
             random: 0,
             enable: true,
@@ -52,17 +52,20 @@ export class Game extends Component {
     //Compare random number to user guessed number
     checkNumberHandler = (e) => {
         e.preventDefault();
-        const { guessedNo, random, count } = this.state;
-        this.setState({ count: count + 1 })
-        if (guessedNo === random) {
-            alert('Congratulation You guessed the number in ' + this.state.count + ' tries');
-            window.location.reload();
-        } else if (guessedNo < random) {
-            alert("You guessed Small Number")
-        }
-        else if (guessedNo > random) {
-            alert("You guessed Big Number")
-        }
+        // this.setState({ count: count + 1 })
+        this.setState(currentState => ({ count: this.state.count + 1 }), () => {
+            const { guessedNo, random } = this.state;
+            if (guessedNo === random) {
+                alert('Congratulation You guessed the number in ' + this.state.count + ' tries');
+                // window.location.reload();
+            } else if (guessedNo < random) {
+                alert("You guessed Small Number")
+            }
+            else if (guessedNo > random) {
+                alert("You guessed Big Number")
+            }
+        });
+
     }
 
     render() {
